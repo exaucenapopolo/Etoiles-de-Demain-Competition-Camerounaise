@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Compétition des Talents Camerounais</title>
-  <meta name="description" content="Plateforme officielle de la compétition artistique en ligne dédiée aux artistes émergents du Cameroun.">
+  <title>Cinexo Productions - Compétition en ligne</title>
+  <meta name="description" content="Cinexo Productions organise une compétition en ligne pour promouvoir les talents. Inscrivez-vous, participez et découvrez les meilleurs artistes.">
   <style>
     /* Reset de base */
     * {
@@ -12,111 +12,149 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f4f4;
       color: #333;
       line-height: 1.6;
-      padding: 20px;
     }
-
     header {
       background-color: #008080;
       color: #fff;
-      padding: 30px 20px;
-      text-align: center;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-
-    header h1 {
-      margin-bottom: 10px;
-    }
-
-    nav {
-      margin-bottom: 30px;
-    }
-
-    nav ul {
+      padding: 20px;
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .logo h1 {
+      font-size: 1.5em;
+    }
+    nav ul {
       list-style: none;
+      display: flex;
+      align-items: center;
       flex-wrap: wrap;
     }
-
     nav ul li {
-      margin: 0 15px;
+      margin: 0 10px;
     }
-
     nav ul li a {
+      color: #fff;
       text-decoration: none;
-      color: #008080;
       font-weight: bold;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
-      color: #005757;
+      color: #c0c0c0;
     }
-
-    main {
-      background-color: #fff;
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .header-right a {
+      margin-left: 15px;
+      color: #fff;
+      background-color: #005757;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .header-right a:hover {
+      background-color: #003f3f;
+    }
+    .cta-banner {
+      background: url('banner-placeholder.jpg') no-repeat center center/cover;
+      height: 300px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
     }
-
+    .cta-banner h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .cta-banner p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .cta-banner a {
+      background-color: #008080;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .cta-banner a:hover {
+      background-color: #005757;
+    }
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
     section {
       margin-bottom: 40px;
+      padding: 20px;
     }
-
-    h2 {
+    section h2 {
       color: #008080;
-      margin-bottom: 15px;
       border-bottom: 2px solid #008080;
+      margin-bottom: 15px;
       padding-bottom: 5px;
     }
-
-    /* Styles du formulaire */
-    form {
-      margin-top: 20px;
+    .form-group {
+      margin-bottom: 15px;
     }
-
-    form label {
+    label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
     }
-
-    form input[type="text"],
-    form input[type="email"],
-    form input[type="password"],
-    form input[type="date"] {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 5px;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
-
-    form button {
+    button {
       background-color: #008080;
       color: #fff;
       border: none;
       padding: 10px 20px;
+      border-radius: 5px;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 5px;
       transition: background-color 0.3s;
     }
-
-    form button:hover {
+    button:hover {
       background-color: #005757;
     }
-
-    /* Styles pour les sections Participants et Résultats */
     .profile-card {
       background-color: #f9f9f9;
       border: 1px solid #ddd;
@@ -125,98 +163,132 @@
       margin-bottom: 15px;
       transition: transform 0.3s;
     }
-
     .profile-card:hover {
       transform: scale(1.02);
     }
-
-    .profile-card h3 {
-      margin-bottom: 10px;
-      color: #008080;
-    }
-
     .results-table {
       width: 100%;
       border-collapse: collapse;
     }
-
     .results-table th,
     .results-table td {
       padding: 10px;
       border: 1px solid #ddd;
       text-align: left;
     }
-
     .results-table th {
       background-color: #008080;
       color: #fff;
     }
-
     footer {
+      background-color: #333;
+      color: #ccc;
       text-align: center;
-      margin-top: 40px;
       padding: 20px;
-      font-size: 0.9em;
-      color: #555;
-      border-top: 1px solid #ddd;
+      margin-top: 40px;
     }
-
+    footer a {
+      color: #008080;
+      text-decoration: none;
+      margin: 0 10px;
+    }
     @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+      }
       nav ul {
         flex-direction: column;
       }
-      
       nav ul li {
-        margin: 10px 0;
+        margin: 5px 0;
+      }
+      .header-right {
+        margin-top: 10px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- En-tête avec logo, navigation et zone de connexion -->
   <header>
-    <h1>Compétition des Talents Camerounais</h1>
-    <p>Découvre, vote et soutiens les artistes émergents du Cameroun</p>
+    <div class="logo">
+      <!-- Remplacer "logo-placeholder.png" par le logo final de Cinexo Productions -->
+      <img src="logo-placeholder.png" alt="Cinexo Productions Logo">
+      <h1>Cinexo Productions</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#inscription">Inscription</a></li>
+        <li><a href="#participants">Participants</a></li>
+        <li><a href="#resultats">Résultats</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <!-- Zone de connexion pour les utilisateurs existants -->
+      <a href="#connexion">Se connecter</a>
+      <!-- Lien WhatsApp -->
+      <a href="https://wa.me/237699853665" target="_blank">WhatsApp</a>
+    </div>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="#accueil">Accueil</a></li>
-      <li><a href="#inscription">Inscription</a></li>
-      <li><a href="#participants">Participants</a></li>
-      <li><a href="#resultats">Résultats</a></li>
-    </ul>
-  </nav>
+  <!-- Bannière d'accueil avec texte attractif et CTA -->
+  <section class="cta-banner" id="accueil">
+    <h2>Bienvenue sur Cinexo Productions</h2>
+    <p>Découvrez la compétition en ligne qui met en lumière les talents émergents et propulse leur carrière à un niveau supérieur.</p>
+    <a href="#inscription">Inscrivez-vous dès maintenant</a>
+  </section>
 
+  <!-- Contenu principal -->
   <main>
-    <!-- Section Accueil -->
-    <section id="accueil">
-      <h2>Accueil</h2>
-      <p>Bienvenue sur la plateforme officielle de la compétition. Ici, les jeunes talents camerounais peuvent présenter leur art, recevoir des votes et obtenir une visibilité exceptionnelle. Explorez notre site pour en savoir plus sur le déroulement du concours, découvrez les participants et consultez les résultats en temps réel.</p>
+    <!-- Section À propos / Compétition -->
+    <section id="apropos">
+      <h2>À propos de la compétition</h2>
+      <p>
+        Cinexo Productions est fier de présenter une compétition en ligne dédiée à la découverte et à la promotion des talents artistiques.
+        Notre mission est de valoriser la créativité, d'offrir une plateforme transparente et sécurisée pour les artistes et de permettre aux fans de participer activement.
+      </p>
+      <p>
+        Rejoignez-nous pour une aventure passionnante où chaque talent a sa chance d'être reconnu. Découvrez notre règlement, notre calendrier et nos partenaires.
+      </p>
     </section>
 
     <!-- Section Inscription -->
     <section id="inscription">
       <h2>Inscription</h2>
-      <p>Créez votre compte pour participer à la compétition. Remplissez le formulaire ci-dessous pour rejoindre notre communauté d'artistes.</p>
+      <p>Créez votre compte pour participer à la compétition. Remplissez le formulaire ci-dessous :</p>
       <form id="signupForm">
-        <label for="fullname">Nom complet :</label>
-        <input type="text" id="fullname" name="fullname" required>
-
-        <label for="stageName">Nom d'artiste :</label>
-        <input type="text" id="stageName" name="stageName" required>
-
-        <label for="birthdate">Date de naissance :</label>
-        <input type="date" id="birthdate" name="birthdate" required>
-
-        <label for="city">Ville :</label>
-        <input type="text" id="city" name="city" required>
-
-        <label for="email">Adresse e-mail :</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
-
+        <div class="form-group">
+          <label for="fullname">Nom complet :</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+        <div class="form-group">
+          <label for="stageName">Nom d'artiste :</label>
+          <input type="text" id="stageName" name="stageName" required>
+        </div>
+        <div class="form-group">
+          <label for="birthdate">Date de naissance :</label>
+          <input type="date" id="birthdate" name="birthdate" required>
+        </div>
+        <div class="form-group">
+          <label for="city">Ville :</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Adresse e-mail :</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe :</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <!-- Case à cocher pour accepter les conditions -->
+        <div class="form-group">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">J'accepte les <a href="#terms-conditions" target="_blank">conditions générales</a> et la politique de confidentialité</label>
+        </div>
         <button type="submit">S'inscrire</button>
       </form>
     </section>
@@ -224,7 +296,7 @@
     <!-- Section Participants -->
     <section id="participants">
       <h2>Participants</h2>
-      <p>Découvrez les profils des participants inscrits à la compétition :</p>
+      <p>Découvrez les profils des participants :</p>
       <div class="profile-card">
         <h3>Artiste 1</h3>
         <p>Nom d'artiste : Exemplar</p>
@@ -235,13 +307,12 @@
         <p>Nom d'artiste : Créatif</p>
         <p>Ville : Yaoundé</p>
       </div>
-      <!-- D'autres profils pourront être ajoutés ici -->
     </section>
 
     <!-- Section Résultats -->
     <section id="resultats">
       <h2>Résultats</h2>
-      <p>Suivez l'évolution des votes et découvrez les résultats en temps réel :</p>
+      <p>Suivez l'évolution des votes :</p>
       <table class="results-table">
         <thead>
           <tr>
@@ -261,22 +332,806 @@
             <td>Créatif</td>
             <td>1200</td>
           </tr>
-          <!-- D'autres lignes de résultats -->
         </tbody>
       </table>
     </section>
+
+    <!-- Section Connexion (pour utilisateurs existants) -->
+    <section id="connexion">
+      <h2>Connexion</h2>
+      <p>Si vous avez déjà un compte, connectez-vous ici :</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Adresse e-mail :</label>
+          <input type="email" id="loginEmail" name="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Mot de passe :</label>
+          <input type="password" id="loginPassword" name="loginPassword" required>
+        </div>
+        <button type="submit">Se connecter</button>
+      </form>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Compétition des Talents Camerounais. Tous droits réservés.</p>
+  <!-- Footer avec informations de contact -->
+  <footer id="contact">
+    <p>&copy; 2025 Cinexo Productions. Tous droits réservés.</p>
+    <p>
+      Contactez-nous : 
+      <a href="mailto:contact@cinexoproductions.com">contact@cinexoproductions.com</a> | 
+      WhatsApp : <a href="https://wa.me/237699853665" target="_blank">+237 699 85 36 65</a>
+    </p>
   </footer>
 
   <script>
     // Gestion du formulaire d'inscription
     document.getElementById('signupForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      // À terme, intégrer Firebase ou une autre solution pour enregistrer l'inscription
       alert("Inscription enregistrée ! (Intégration backend à venir)");
+    });
+    // Gestion du formulaire de connexion
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Connexion réussie ! (Intégration backend à venir)");
+    });
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cinexo Productions - Compétition en ligne</title>
+  <meta name="description" content="Cinexo Productions organise une compétition en ligne pour promouvoir les talents. Inscrivez-vous, participez et découvrez les meilleurs artistes.">
+  <style>
+    /* Reset de base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #008080;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .logo h1 {
+      font-size: 1.5em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      margin: 0 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #c0c0c0;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .header-right a {
+      margin-left: 15px;
+      color: #fff;
+      background-color: #005757;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .header-right a:hover {
+      background-color: #003f3f;
+    }
+    .cta-banner {
+      background: url('banner-placeholder.jpg') no-repeat center center/cover;
+      height: 300px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .cta-banner h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .cta-banner p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .cta-banner a {
+      background-color: #008080;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .cta-banner a:hover {
+      background-color: #005757;
+    }
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+    }
+    section h2 {
+      color: #008080;
+      border-bottom: 2px solid #008080;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #008080;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #005757;
+    }
+    .profile-card {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+    .profile-card:hover {
+      transform: scale(1.02);
+    }
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .results-table th,
+    .results-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .results-table th {
+      background-color: #008080;
+      color: #fff;
+    }
+    footer {
+      background-color: #333;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+      }
+      nav ul {
+        flex-direction: column;
+      }
+      nav ul li {
+        margin: 5px 0;
+      }
+      .header-right {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- En-tête avec logo, navigation et zone de connexion -->
+  <header>
+    <div class="logo">
+      <!-- Remplacer "logo-placeholder.png" par le logo final de Cinexo Productions -->
+      <img src="logo-placeholder.png" alt="Cinexo Productions Logo">
+      <h1>Cinexo Productions</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#inscription">Inscription</a></li>
+        <li><a href="#participants">Participants</a></li>
+        <li><a href="#resultats">Résultats</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <!-- Zone de connexion pour les utilisateurs existants -->
+      <a href="#connexion">Se connecter</a>
+      <!-- Lien WhatsApp -->
+      <a href="https://wa.me/237699853665" target="_blank">WhatsApp</a>
+    </div>
+  </header>
+
+  <!-- Bannière d'accueil avec texte attractif et CTA -->
+  <section class="cta-banner" id="accueil">
+    <h2>Bienvenue sur Cinexo Productions</h2>
+    <p>Découvrez la compétition en ligne qui met en lumière les talents émergents et propulse leur carrière à un niveau supérieur.</p>
+    <a href="#inscription">Inscrivez-vous dès maintenant</a>
+  </section>
+
+  <!-- Contenu principal -->
+  <main>
+    <!-- Section À propos / Compétition -->
+    <section id="apropos">
+      <h2>À propos de la compétition</h2>
+      <p>
+        Cinexo Productions est fier de présenter une compétition en ligne dédiée à la découverte et à la promotion des talents artistiques.
+        Notre mission est de valoriser la créativité, d'offrir une plateforme transparente et sécurisée pour les artistes et de permettre aux fans de participer activement.
+      </p>
+      <p>
+        Rejoignez-nous pour une aventure passionnante où chaque talent a sa chance d'être reconnu. Découvrez notre règlement, notre calendrier et nos partenaires.
+      </p>
+    </section>
+
+    <!-- Section Inscription -->
+    <section id="inscription">
+      <h2>Inscription</h2>
+      <p>Créez votre compte pour participer à la compétition. Remplissez le formulaire ci-dessous :</p>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="fullname">Nom complet :</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+        <div class="form-group">
+          <label for="stageName">Nom d'artiste :</label>
+          <input type="text" id="stageName" name="stageName" required>
+        </div>
+        <div class="form-group">
+          <label for="birthdate">Date de naissance :</label>
+          <input type="date" id="birthdate" name="birthdate" required>
+        </div>
+        <div class="form-group">
+          <label for="city">Ville :</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Adresse e-mail :</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe :</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <!-- Case à cocher pour accepter les conditions -->
+        <div class="form-group">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">J'accepte les <a href="#terms-conditions" target="_blank">conditions générales</a> et la politique de confidentialité</label>
+        </div>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </section>
+
+    <!-- Section Participants -->
+    <section id="participants">
+      <h2>Participants</h2>
+      <p>Découvrez les profils des participants :</p>
+      <div class="profile-card">
+        <h3>Artiste 1</h3>
+        <p>Nom d'artiste : Exemplar</p>
+        <p>Ville : Douala</p>
+      </div>
+      <div class="profile-card">
+        <h3>Artiste 2</h3>
+        <p>Nom d'artiste : Créatif</p>
+        <p>Ville : Yaoundé</p>
+      </div>
+    </section>
+
+    <!-- Section Résultats -->
+    <section id="resultats">
+      <h2>Résultats</h2>
+      <p>Suivez l'évolution des votes :</p>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Nom d'artiste</th>
+            <th>Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Exemplar</td>
+            <td>1500</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Créatif</td>
+            <td>1200</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section Connexion (pour utilisateurs existants) -->
+    <section id="connexion">
+      <h2>Connexion</h2>
+      <p>Si vous avez déjà un compte, connectez-vous ici :</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Adresse e-mail :</label>
+          <input type="email" id="loginEmail" name="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Mot de passe :</label>
+          <input type="password" id="loginPassword" name="loginPassword" required>
+        </div>
+        <button type="submit">Se connecter</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer avec informations de contact -->
+  <footer id="contact">
+    <p>&copy; 2025 Cinexo Productions. Tous droits réservés.</p>
+    <p>
+      Contactez-nous : 
+      <a href="mailto:contact@cinexoproductions.com">contact@cinexoproductions.com</a> | 
+      WhatsApp : <a href="https://wa.me/237699853665" target="_blank">+237 699 85 36 65</a>
+    </p>
+  </footer>
+
+  <script>
+    // Gestion du formulaire d'inscription
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Inscription enregistrée ! (Intégration backend à venir)");
+    });
+    // Gestion du formulaire de connexion
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Connexion réussie ! (Intégration backend à venir)");
+    });
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cinexo Productions - Compétition en ligne</title>
+  <meta name="description" content="Cinexo Productions organise une compétition en ligne pour promouvoir les talents. Inscrivez-vous, participez et découvrez les meilleurs artistes.">
+  <style>
+    /* Reset de base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #008080;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .logo h1 {
+      font-size: 1.5em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      margin: 0 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #c0c0c0;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .header-right a {
+      margin-left: 15px;
+      color: #fff;
+      background-color: #005757;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .header-right a:hover {
+      background-color: #003f3f;
+    }
+    .cta-banner {
+      background: url('banner-placeholder.jpg') no-repeat center center/cover;
+      height: 300px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .cta-banner h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .cta-banner p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .cta-banner a {
+      background-color: #008080;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .cta-banner a:hover {
+      background-color: #005757;
+    }
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+    }
+    section h2 {
+      color: #008080;
+      border-bottom: 2px solid #008080;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #008080;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #005757;
+    }
+    .profile-card {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+    .profile-card:hover {
+      transform: scale(1.02);
+    }
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .results-table th,
+    .results-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .results-table th {
+      background-color: #008080;
+      color: #fff;
+    }
+    footer {
+      background-color: #333;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+      }
+      nav ul {
+        flex-direction: column;
+      }
+      nav ul li {
+        margin: 5px 0;
+      }
+      .header-right {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- En-tête avec logo, navigation et zone de connexion -->
+  <header>
+    <div class="logo">
+      <!-- Remplacer "logo-placeholder.png" par le logo final de Cinexo Productions -->
+      <img src="logo-placeholder.png" alt="Cinexo Productions Logo">
+      <h1>Cinexo Productions</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#inscription">Inscription</a></li>
+        <li><a href="#participants">Participants</a></li>
+        <li><a href="#resultats">Résultats</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <!-- Zone de connexion pour les utilisateurs existants -->
+      <a href="#connexion">Se connecter</a>
+      <!-- Lien WhatsApp -->
+      <a href="https://wa.me/237699853665" target="_blank">WhatsApp</a>
+    </div>
+  </header>
+
+  <!-- Bannière d'accueil avec texte attractif et CTA -->
+  <section class="cta-banner" id="accueil">
+    <h2>Bienvenue sur Cinexo Productions</h2>
+    <p>Découvrez la compétition en ligne qui met en lumière les talents émergents et propulse leur carrière à un niveau supérieur.</p>
+    <a href="#inscription">Inscrivez-vous dès maintenant</a>
+  </section>
+
+  <!-- Contenu principal -->
+  <main>
+    <!-- Section À propos / Compétition -->
+    <section id="apropos">
+      <h2>À propos de la compétition</h2>
+      <p>
+        Cinexo Productions est fier de présenter une compétition en ligne dédiée à la découverte et à la promotion des talents artistiques.
+        Notre mission est de valoriser la créativité, d'offrir une plateforme transparente et sécurisée pour les artistes et de permettre aux fans de participer activement.
+      </p>
+      <p>
+        Rejoignez-nous pour une aventure passionnante où chaque talent a sa chance d'être reconnu. Découvrez notre règlement, notre calendrier et nos partenaires.
+      </p>
+    </section>
+
+    <!-- Section Inscription -->
+    <section id="inscription">
+      <h2>Inscription</h2>
+      <p>Créez votre compte pour participer à la compétition. Remplissez le formulaire ci-dessous :</p>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="fullname">Nom complet :</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+        <div class="form-group">
+          <label for="stageName">Nom d'artiste :</label>
+          <input type="text" id="stageName" name="stageName" required>
+        </div>
+        <div class="form-group">
+          <label for="birthdate">Date de naissance :</label>
+          <input type="date" id="birthdate" name="birthdate" required>
+        </div>
+        <div class="form-group">
+          <label for="city">Ville :</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Adresse e-mail :</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe :</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <!-- Case à cocher pour accepter les conditions -->
+        <div class="form-group">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">J'accepte les <a href="#terms-conditions" target="_blank">conditions générales</a> et la politique de confidentialité</label>
+        </div>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </section>
+
+    <!-- Section Participants -->
+    <section id="participants">
+      <h2>Participants</h2>
+      <p>Découvrez les profils des participants :</p>
+      <div class="profile-card">
+        <h3>Artiste 1</h3>
+        <p>Nom d'artiste : Exemplar</p>
+        <p>Ville : Douala</p>
+      </div>
+      <div class="profile-card">
+        <h3>Artiste 2</h3>
+        <p>Nom d'artiste : Créatif</p>
+        <p>Ville : Yaoundé</p>
+      </div>
+    </section>
+
+    <!-- Section Résultats -->
+    <section id="resultats">
+      <h2>Résultats</h2>
+      <p>Suivez l'évolution des votes :</p>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Nom d'artiste</th>
+            <th>Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Exemplar</td>
+            <td>1500</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Créatif</td>
+            <td>1200</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section Connexion (pour utilisateurs existants) -->
+    <section id="connexion">
+      <h2>Connexion</h2>
+      <p>Si vous avez déjà un compte, connectez-vous ici :</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Adresse e-mail :</label>
+          <input type="email" id="loginEmail" name="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Mot de passe :</label>
+          <input type="password" id="loginPassword" name="loginPassword" required>
+        </div>
+        <button type="submit">Se connecter</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer avec informations de contact -->
+  <footer id="contact">
+    <p>&copy; 2025 Cinexo Productions. Tous droits réservés.</p>
+    <p>
+      Contactez-nous : 
+      <a href="mailto:contact@cinexoproductions.com">contact@cinexoproductions.com</a> | 
+      WhatsApp : <a href="https://wa.me/237699853665" target="_blank">+237 699 85 36 65</a>
+    </p>
+  </footer>
+
+  <script>
+    // Gestion du formulaire d'inscription
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Inscription enregistrée ! (Intégration backend à venir)");
+    });
+    // Gestion du formulaire de connexion
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Connexion réussie ! (Intégration backend à venir)");
     });
   </script>
 </body>

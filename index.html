@@ -5,9 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Compétition des Talents Camerounais</title>
   <meta name="description" content="Plateforme officielle de la compétition artistique en ligne dédiée aux artistes émergents du Cameroun.">
-  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Reset de base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #008080;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #008080;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #005757;
+    }
+
+    main {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #008080;
+      margin-bottom: 10px;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #008080;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #005757;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
+
   <header>
     <h1>Compétition des Talents Camerounais</h1>
     <p>Découvre, vote et soutiens les artistes émergents du Cameroun</p>
@@ -16,7 +122,7 @@
   <nav>
     <ul>
       <li><a href="#">Accueil</a></li>
-      <li><a href="#">Inscription</a></li>
+      <li><a href="#inscription">Inscription</a></li>
       <li><a href="#">Participants</a></li>
       <li><a href="#">Résultats</a></li>
     </ul>
@@ -31,16 +137,48 @@
     <section>
       <h2>Comment participer ?</h2>
       <ol>
-        <li>Crée un compte (à venir avec Firebase)</li>
+        <li>Crée un compte (juste en bas)</li>
         <li>Soumets ta prestation</li>
         <li>Invite les gens à voter</li>
         <li>Le/la gagnant(e) sera annoncé(e) en ligne</li>
       </ol>
+    </section>
+
+    <section id="inscription">
+      <h2>Formulaire d'inscription</h2>
+      <form id="signupForm">
+        <label for="fullname">Nom complet :</label>
+        <input type="text" id="fullname" name="fullname" required>
+
+        <label for="stageName">Nom d'artiste :</label>
+        <input type="text" id="stageName" name="stageName" required>
+
+        <label for="birthdate">Date de naissance :</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <label for="city">Ville :</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="email">Adresse e-mail :</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">S'inscrire</button>
+      </form>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Compétition des Talents Camerounais. Tous droits réservés.</p>
   </footer>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Inscription enregistrée ! (Firebase sera connecté ensuite)");
+    });
+  </script>
 </body>
 </html>

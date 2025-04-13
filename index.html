@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cinexo Productions - Compétition en ligne</title>
-  <meta name="description" content="Cinexo Productions organise une compétition en ligne pour promouvoir les talents. Inscrivez-vous, participez et découvrez les meilleurs artistes.">
+  <meta name="description" content="Cinexo Productions organise une compétition en ligne pour promouvoir les talents. Inscrivez-vous ou connectez-vous pour participer.">
   <style>
     /* Reset de base */
     * {
@@ -74,6 +74,7 @@
     .header-right a:hover {
       background-color: #003f3f;
     }
+    /* Bannière d'accueil */
     .cta-banner {
       background: url('banner-placeholder.jpg') no-repeat center center/cover;
       height: 300px;
@@ -125,6 +126,32 @@
       margin-bottom: 15px;
       padding-bottom: 5px;
     }
+    /* Section Compte (Inscription / Connexion unifiées) */
+    .account-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+    .account-tabs button {
+      background: none;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      color: #008080;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .account-tabs button.active {
+      border-bottom: 3px solid #008080;
+      font-weight: bold;
+    }
+    .account-form {
+      display: none;
+    }
+    .account-form.active {
+      display: block;
+    }
     .form-group {
       margin-bottom: 15px;
     }
@@ -142,7 +169,7 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-    button {
+    button.submit-btn {
       background-color: #008080;
       color: #fff;
       border: none;
@@ -152,9 +179,10 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    button:hover {
+    button.submit-btn:hover {
       background-color: #005757;
     }
+    /* Section Participants */
     .profile-card {
       background-color: #f9f9f9;
       border: 1px solid #ddd;
@@ -166,6 +194,7 @@
     .profile-card:hover {
       transform: scale(1.02);
     }
+    /* Section Résultats */
     .results-table {
       width: 100%;
       border-collapse: collapse;
@@ -180,6 +209,16 @@
       background-color: #008080;
       color: #fff;
     }
+    /* Section Contacts */
+    .contact-details {
+      font-size: 1em;
+      line-height: 1.8;
+    }
+    .contact-details a {
+      color: #008080;
+      text-decoration: none;
+    }
+    /* Footer */
     footer {
       background-color: #333;
       color: #ccc;
@@ -205,11 +244,18 @@
       .header-right {
         margin-top: 10px;
       }
+      .account-tabs {
+        flex-direction: column;
+      }
+      .account-tabs button {
+        text-align: left;
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- En-tête avec logo, navigation et zone de connexion -->
+  <!-- En-tête avec logo, navigation et lien WhatsApp -->
   <header>
     <div class="logo">
       <!-- Remplacer "logo-placeholder.png" par le logo final de Cinexo Productions -->
@@ -220,77 +266,90 @@
       <ul>
         <li><a href="#accueil">Accueil</a></li>
         <li><a href="#apropos">À propos</a></li>
-        <li><a href="#inscription">Inscription</a></li>
+        <li><a href="#compte">Inscription</a></li>
         <li><a href="#participants">Participants</a></li>
         <li><a href="#resultats">Résultats</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Contacts</a></li>
       </ul>
     </nav>
     <div class="header-right">
-      <!-- Zone de connexion pour les utilisateurs existants -->
-      <a href="#connexion">Se connecter</a>
-      <!-- Lien WhatsApp -->
       <a href="https://wa.me/237699853665" target="_blank">WhatsApp</a>
     </div>
   </header>
 
-  <!-- Bannière d'accueil avec texte attractif et CTA -->
+  <!-- Bannière d'accueil avec le message de bienvenue -->
   <section class="cta-banner" id="accueil">
     <h2>Bienvenue sur Cinexo Productions</h2>
-    <p>Découvrez la compétition en ligne qui met en lumière les talents émergents et propulse leur carrière à un niveau supérieur.</p>
-    <a href="#inscription">Inscrivez-vous dès maintenant</a>
+    <p>Découvrez la compétition en ligne qui propulse les talents émergents vers de nouveaux horizons.</p>
+    <a href="#compte">Rejoignez-nous</a>
   </section>
 
-  <!-- Contenu principal -->
+  <!-- Contenu principal : Sections en bas -->
   <main>
-    <!-- Section À propos / Compétition -->
+    <!-- Section À propos -->
     <section id="apropos">
-      <h2>À propos de la compétition</h2>
+      <h2>À propos</h2>
       <p>
-        Cinexo Productions est fier de présenter une compétition en ligne dédiée à la découverte et à la promotion des talents artistiques.
-        Notre mission est de valoriser la créativité, d'offrir une plateforme transparente et sécurisée pour les artistes et de permettre aux fans de participer activement.
-      </p>
-      <p>
-        Rejoignez-nous pour une aventure passionnante où chaque talent a sa chance d'être reconnu. Découvrez notre règlement, notre calendrier et nos partenaires.
+        Cinexo Productions organise une compétition en ligne dédiée à la promotion des talents artistiques.
+        Notre mission est de valoriser la créativité, offrir une plateforme transparente et sécurisée, et permettre aux fans de soutenir leurs artistes préférés.
       </p>
     </section>
 
-    <!-- Section Inscription -->
-    <section id="inscription">
+    <!-- Section Inscription (Compte unifié : inscription / connexion) -->
+    <section id="compte">
       <h2>Inscription</h2>
-      <p>Créez votre compte pour participer à la compétition. Remplissez le formulaire ci-dessous :</p>
-      <form id="signupForm">
-        <div class="form-group">
-          <label for="fullname">Nom complet :</label>
-          <input type="text" id="fullname" name="fullname" required>
-        </div>
-        <div class="form-group">
-          <label for="stageName">Nom d'artiste :</label>
-          <input type="text" id="stageName" name="stageName" required>
-        </div>
-        <div class="form-group">
-          <label for="birthdate">Date de naissance :</label>
-          <input type="date" id="birthdate" name="birthdate" required>
-        </div>
-        <div class="form-group">
-          <label for="city">Ville :</label>
-          <input type="text" id="city" name="city" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Adresse e-mail :</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Mot de passe :</label>
-          <input type="password" id="password" name="password" required>
-        </div>
-        <!-- Case à cocher pour accepter les conditions -->
-        <div class="form-group">
-          <input type="checkbox" id="terms" name="terms" required>
-          <label for="terms">J'accepte les <a href="#terms-conditions" target="_blank">conditions générales</a> et la politique de confidentialité</label>
-        </div>
-        <button type="submit">S'inscrire</button>
-      </form>
+      <div class="account-tabs">
+        <button id="tabRegister" class="active">S'inscrire</button>
+        <button id="tabLogin">Se connecter</button>
+      </div>
+      <!-- Formulaire d'inscription -->
+      <div id="registerForm" class="account-form active">
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="fullname">Nom complet :</label>
+            <input type="text" id="fullname" name="fullname" required>
+          </div>
+          <div class="form-group">
+            <label for="stageName">Nom d'artiste :</label>
+            <input type="text" id="stageName" name="stageName" required>
+          </div>
+          <div class="form-group">
+            <label for="birthdate">Date de naissance :</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+          </div>
+          <div class="form-group">
+            <label for="city">Ville :</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse e-mail :</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">J'accepte les <a href="#terms-conditions" target="_blank">conditions générales</a> et la politique de confidentialité</label>
+          </div>
+          <button type="submit" class="submit-btn">S'inscrire</button>
+        </form>
+      </div>
+      <!-- Formulaire de connexion -->
+      <div id="loginForm" class="account-form">
+        <form id="userLoginForm">
+          <div class="form-group">
+            <label for="loginEmail">Adresse e-mail :</label>
+            <input type="email" id="loginEmail" name="loginEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Mot de passe :</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+          </div>
+          <button type="submit" class="submit-btn">Se connecter</button>
+        </form>
+      </div>
     </section>
 
     <!-- Section Participants -->
@@ -336,42 +395,52 @@
       </table>
     </section>
 
-    <!-- Section Connexion (pour utilisateurs existants) -->
-    <section id="connexion">
-      <h2>Connexion</h2>
-      <p>Si vous avez déjà un compte, connectez-vous ici :</p>
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="loginEmail">Adresse e-mail :</label>
-          <input type="email" id="loginEmail" name="loginEmail" required>
-        </div>
-        <div class="form-group">
-          <label for="loginPassword">Mot de passe :</label>
-          <input type="password" id="loginPassword" name="loginPassword" required>
-        </div>
-        <button type="submit">Se connecter</button>
-      </form>
+    <!-- Section Contacts -->
+    <section id="contact">
+      <h2>Contacts</h2>
+      <div class="contact-details">
+        <p>Pour toute question, contactez-nous :</p>
+        <p>
+          Email : <a href="mailto:contact@cinexoproductions.com">contact@cinexoproductions.com</a><br>
+          WhatsApp : <a href="https://wa.me/237699853665" target="_blank">+237 699 85 36 65</a>
+        </p>
+      </div>
     </section>
   </main>
 
-  <!-- Footer avec informations de contact -->
-  <footer id="contact">
+  <!-- Footer complémentaire -->
+  <footer>
     <p>&copy; 2025 Cinexo Productions. Tous droits réservés.</p>
-    <p>
-      Contactez-nous : 
-      <a href="mailto:contact@cinexoproductions.com">contact@cinexoproductions.com</a> | 
-      WhatsApp : <a href="https://wa.me/237699853665" target="_blank">+237 699 85 36 65</a>
-    </p>
   </footer>
 
   <script>
+    // Gestion des onglets pour la section Compte (Inscription / Connexion)
+    const tabRegister = document.getElementById('tabRegister');
+    const tabLogin = document.getElementById('tabLogin');
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
+
+    tabRegister.addEventListener('click', () => {
+      tabRegister.classList.add('active');
+      tabLogin.classList.remove('active');
+      registerForm.classList.add('active');
+      loginForm.classList.remove('active');
+    });
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.classList.add('active');
+      tabRegister.classList.remove('active');
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+    });
+
     // Gestion du formulaire d'inscription
     document.getElementById('signupForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert("Inscription enregistrée ! (Intégration backend à venir)");
     });
     // Gestion du formulaire de connexion
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    document.getElementById('userLoginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert("Connexion réussie ! (Intégration backend à venir)");
     });

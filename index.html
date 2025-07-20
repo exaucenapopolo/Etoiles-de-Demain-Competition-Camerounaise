@@ -1,449 +1,1480 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cinexo Productions - Compétition en ligne</title>
-  <meta name="description" content="Cinexo Productions organise une compétition en ligne pour promouvoir les talents. Inscrivez-vous ou connectez-vous pour participer.">
-  <style>
-    /* Reset de base */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      background-color: #008080;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-    .logo img {
-      height: 50px;
-      width: auto;
-      margin-right: 10px;
-    }
-    .logo h1 {
-      font-size: 1.5em;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    nav ul li {
-      margin: 0 10px;
-    }
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav ul li a:hover {
-      color: #c0c0c0;
-    }
-    .header-right {
-      display: flex;
-      align-items: center;
-    }
-    .header-right a {
-      margin-left: 15px;
-      color: #fff;
-      background-color: #005757;
-      padding: 8px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    .header-right a:hover {
-      background-color: #003f3f;
-    }
-    /* Bannière d'accueil */
-    .cta-banner {
-      background: url('banner-placeholder.jpg') no-repeat center center/cover;
-      height: 300px;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-    }
-    .cta-banner h2 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-    .cta-banner p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-    .cta-banner a {
-      background-color: #008080;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    .cta-banner a:hover {
-      background-color: #005757;
-    }
-    main {
-      padding: 20px;
-      max-width: 1200px;
-      margin: 20px auto;
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      border-radius: 8px;
-    }
-    section {
-      margin-bottom: 40px;
-      padding: 20px;
-    }
-    section h2 {
-      color: #008080;
-      border-bottom: 2px solid #008080;
-      margin-bottom: 15px;
-      padding-bottom: 5px;
-    }
-    /* Section Compte (Inscription / Connexion unifiées) */
-    .account-tabs {
-      display: flex;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #ccc;
-    }
-    .account-tabs button {
-      background: none;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-      color: #008080;
-      border-bottom: 3px solid transparent;
-      transition: border-color 0.3s;
-    }
-    .account-tabs button.active {
-      border-bottom: 3px solid #008080;
-      font-weight: bold;
-    }
-    .account-form {
-      display: none;
-    }
-    .account-form.active {
-      display: block;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="date"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button.submit-btn {
-      background-color: #008080;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button.submit-btn:hover {
-      background-color: #005757;
-    }
-    /* Section Participants */
-    .profile-card {
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 15px;
-      margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-    .profile-card:hover {
-      transform: scale(1.02);
-    }
-    /* Section Résultats */
-    .results-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .results-table th,
-    .results-table td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    .results-table th {
-      background-color: #008080;
-      color: #fff;
-    }
-    /* Section Contacts */
-    .contact-details {
-      font-size: 1em;
-      line-height: 1.8;
-    }
-    .contact-details a {
-      color: #008080;
-      text-decoration: none;
-    }
-    /* Footer */
-    footer {
-      background-color: #333;
-      color: #ccc;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-    footer a {
-      color: #008080;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-      }
-      nav ul {
-        flex-direction: column;
-      }
-      nav ul li {
-        margin: 5px 0;
-      }
-      .header-right {
-        margin-top: 10px;
-      }
-      .account-tabs {
-        flex-direction: column;
-      }
-      .account-tabs button {
-        text-align: left;
-        padding: 10px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZONE VS MUZIK | Battles Musicaux Africains</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green: #009639;
+            --red: #CE1126;
+            --yellow: #FCD116;
+            --anthracite: #2E2E2E;
+            --white: #FFFFFF;
+            --orange: #FF6B00;
+            --fuchsia: #D6007E;
+            --gray-light: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--anthracite);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #007a2b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0b500;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--yellow);
+            color: var(--yellow);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--anthracite);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--yellow);
+            font-size: 1.8rem;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        .logo-vs {
+            color: var(--red);
+            margin: 0 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--yellow);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--yellow);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(46, 46, 46, 0.8), rgba(46, 46, 46, 0.5));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            padding: 0 20px;
+            color: var(--white);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .indicator.active {
+            background-color: var(--yellow);
+            transform: scale(1.2);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--anthracite);
+        }
+
+        .section-title span {
+            color: var(--green);
+        }
+
+        /* Featured Artists */
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .artist-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .artist-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .artist-info {
+            padding: 20px;
+        }
+
+        .artist-name {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .artist-country {
+            color: var(--green);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .artist-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--red);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* Battles Section */
+        .battles-section {
+            background-color: var(--gray-light);
+        }
+
+        .battles-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .battles-filters {
+            flex: 0 0 250px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--anthracite);
+            font-weight: 600;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .battles-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .battle-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .battle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .battle-header {
+            position: relative;
+            height: 180px;
+        }
+
+        .battle-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .battle-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--green);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .battle-status.ended {
+            background-color: var(--red);
+        }
+
+        .battle-content {
+            padding: 20px;
+        }
+
+        .battle-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .battle-artists {
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .battle-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Battle Detail */
+        .battle-detail {
+            padding: 60px 0;
+        }
+
+        .battle-header-detail {
+            position: relative;
+            height: 400px;
+            margin-bottom: 50px;
+        }
+
+        .battle-header-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(46, 46, 46, 0.9), transparent);
+            color: white;
+        }
+
+        .battle-title-detail {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .battle-artists-detail {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .battle-timer {
+            display: inline-block;
+            background-color: var(--red);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .battle-content-detail {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+        }
+
+        .battle-description {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .contestants {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .contestant {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .contestant:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .contestant-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid var(--gray-light);
+        }
+
+        .contestant-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contestant-country {
+            color: var(--green);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .vote-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .vote-btn.contestant1 {
+            background-color: var(--green);
+        }
+
+        .vote-btn.contestant2 {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+        }
+
+        .vote-stats {
+            margin-top: 20px;
+        }
+
+        .vote-progress {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .vote-progress-bar {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .vote-progress-bar.contestant1 {
+            background-color: var(--green);
+            width: 65%;
+        }
+
+        .vote-progress-bar.contestant2 {
+            background-color: var(--yellow);
+            width: 35%;
+        }
+
+        .vote-percentage {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .vote-count {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--anthracite);
+        }
+
+        /* Rankings */
+        .rankings-section {
+            background-color: var(--anthracite);
+            color: var(--white);
+        }
+
+        .rankings-title {
+            color: var(--white);
+        }
+
+        .ranking-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .ranking-tab {
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .ranking-tab.active {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+            font-weight: 600;
+        }
+
+        .ranking-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .ranking-header {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 100px;
+            padding: 15px 20px;
+            background-color: var(--gray-light);
+            font-weight: 600;
+            color: var(--anthracite);
+        }
+
+        .ranking-item {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 100px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            color: var(--anthracite);
+        }
+
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+
+        .ranking-position {
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .ranking-artist {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ranking-artist-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--anthracite);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--yellow);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .battle-content-detail {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links, .user-actions {
+                display: none;
+            }
+            
+            .battles-container {
+                flex-direction: column;
+            }
+            
+            .battles-filters {
+                flex: 1;
+            }
+            
+            .contestants {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .battle-title-detail {
+                font-size: 1.8rem;
+            }
+            
+            .ranking-header, .ranking-item {
+                grid-template-columns: 30px 1fr 70px 70px;
+            }
+        }
+
+        /* Animation for vote bars */
+        @keyframes grow {
+            from { width: 0%; }
+            to { width: var(--width, 50%); }
+        }
+
+        .vote-progress-bar {
+            animation: grow 1s ease-out forwards;
+        }
+    </style>
 </head>
 <body>
-  <!-- En-tête avec logo, navigation et lien WhatsApp -->
-  <header>
-    <div class="logo">
-      <!-- Remplacer "logo-placeholder.png" par le logo final de Cinexo Productions -->
-      <img src="logo-placeholder.png" alt="Cinexo Productions Logo">
-      <h1>Cinexo Productions</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#apropos">À propos</a></li>
-        <li><a href="#compte">Inscription</a></li>
-        <li><a href="#participants">Participants</a></li>
-        <li><a href="#resultats">Résultats</a></li>
-        <li><a href="#contact">Contacts</a></li>
-      </ul>
-    </nav>
-    <div class="header-right">
-      <a href="https://wa.me/237699853665" target="_blank">WhatsApp</a>
-    </div>
-  </header>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-music logo-icon"></i>
+                <div class="logo-text">ZONE <span class="logo-vs">VS</span> MUZIK</div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#home">Accueil</a>
+                <a href="#battles">Battles</a>
+                <a href="#artists">Artistes</a>
+                <a href="#rankings">Classements</a>
+                <a href="#about">À propos</a>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="btn btn-outline">Connexion</a>
+                <a href="#" class="btn btn-primary">Inscription</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
-  <!-- Bannière d'accueil avec le message de bienvenue -->
-  <section class="cta-banner" id="accueil">
-    <h2>Bienvenue sur Cinexo Productions</h2>
-    <p>Découvrez la compétition en ligne qui propulse les talents émergents vers de nouveaux horizons.</p>
-    <a href="https://github.com/exaucenapopolo/Etoiles-de-Demain-Competition-Camerounaise/blob/main/Mr%20Exau_UN_TOUR_By_Cinexau%20prod_Young%20forever.mp3">Rejoignez-nous</a>
-  </section>
-
-  <!-- Contenu principal : Sections en bas -->
-  <main>
-    <!-- Section À propos -->
-    <section id="apropos">
-      <h2>À propos</h2>
-      <p>
-        Cinexo Productions organise une compétition en ligne dédiée à la promotion des talents artistiques.
-        Notre mission est de valoriser la créativité, offrir une plateforme transparente et sécurisée, et permettre aux fans de soutenir leurs artistes préférés.
-      </p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Découvrez les talents musicaux de l'Afrique</h1>
+                    <p class="hero-subtitle">Votez pour vos artistes préférés, participez à des battles épiques et faites monter les meilleurs talents en haut des classements.</p>
+                    <a href="#battles" class="btn btn-primary">Voter maintenant</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">La scène musicale africaine comme vous ne l'avez jamais vue</h1>
+                    <p class="hero-subtitle">Des battles palpitants entre artistes émergents et établis de tout le continent.</p>
+                    <a href="#battles" class="btn btn-primary">Voir les battles</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+        </div>
     </section>
 
-    <!-- Section Inscription (Compte unifié : inscription / connexion) -->
-    <section id="compte">
-      <h2>Inscription</h2>
-      <div class="account-tabs">
-        <button id="tabRegister" class="active">S'inscrire</button>
-        <button id="tabLogin">Se connecter</button>
-      </div>
-      <!-- Formulaire d'inscription -->
-      <div id="registerForm" class="account-form active">
-        <form id="signupForm">
-          <div class="form-group">
-            <label for="fullname">Nom complet :</label>
-            <input type="text" id="fullname" name="fullname" required>
-          </div>
-          <div class="form-group">
-            <label for="stageName">Nom d'artiste :</label>
-            <input type="text" id="stageName" name="stageName" required>
-          </div>
-          <div class="form-group">
-            <label for="birthdate">Date de naissance :</label>
-            <input type="date" id="birthdate" name="birthdate" required>
-          </div>
-          <div class="form-group">
-            <label for="city">Ville :</label>
-            <input type="text" id="city" name="city" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Adresse e-mail :</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" required>
-          </div>
-          <div class="form-group">
-            <input type="checkbox" id="terms" name="terms" required>
-            <label for="terms">J'accepte les <a href="#terms-conditions" target="_blank">conditions générales</a> et la politique de confidentialité</label>
-          </div>
-          <button type="submit" class="submit-btn">S'inscrire</button>
-        </form>
-      </div>
-      <!-- Formulaire de connexion -->
-      <div id="loginForm" class="account-form">
-        <form id="userLoginForm">
-          <div class="form-group">
-            <label for="loginEmail">Adresse e-mail :</label>
-            <input type="email" id="loginEmail" name="loginEmail" required>
-          </div>
-          <div class="form-group">
-            <label for="loginPassword">Mot de passe :</label>
-            <input type="password" id="loginPassword" name="loginPassword" required>
-          </div>
-          <button type="submit" class="submit-btn">Se connecter</button>
-        </form>
-      </div>
+    <!-- Featured Artists -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Artistes <span>à l'honneur</span></h2>
+            
+            <div class="artists-grid">
+                <!-- Artist 1 -->
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="artist-image">
+                    <div class="artist-info">
+                        <h3 class="artist-name">Makossa Man</h3>
+                        <span class="artist-country">Cameroun</span>
+                        <p>Spécialiste du Makossa moderne avec une touche électro</p>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">Battles</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Victoires</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">86%</div>
+                                <div class="stat-label">Win rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artist 2 -->
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="artist-image">
+                    <div class="artist-info">
+                        <h3 class="artist-name">Afro Queen</h3>
+                        <span class="artist-country">Nigeria</span>
+                        <p>Reine de l'Afrobeats avec des influences dancehall</p>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <div class="stat-value">19</div>
+                                <div class="stat-label">Battles</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">15</div>
+                                <div class="stat-label">Victoires</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">79%</div>
+                                <div class="stat-label">Win rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artist 3 -->
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1517232115160-ff93364542dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="artist-image">
+                    <div class="artist-info">
+                        <h3 class="artist-name">Rap Master</h3>
+                        <span class="artist-country">Sénégal</span>
+                        <p>Flow puissant et textes engagés sur des beats percutants</p>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <div class="stat-value">22</div>
+                                <div class="stat-label">Battles</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">16</div>
+                                <div class="stat-label">Victoires</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">73%</div>
+                                <div class="stat-label">Win rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artist 4 -->
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Artist" class="artist-image">
+                    <div class="artist-info">
+                        <h3 class="artist-name">Soul Diva</h3>
+                        <span class="artist-country">Afrique du Sud</span>
+                        <p>Voix puissante et mélodies envoûtantes pour une soul africaine</p>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <div class="stat-value">17</div>
+                                <div class="stat-label">Battles</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Victoires</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">71%</div>
+                                <div class="stat-label">Win rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Section Participants -->
-    <section id="participants">
-      <h2>Participants</h2>
-      <p>Découvrez les profils des participants :</p>
-      <div class="profile-card">
-        <h3>Artiste 1</h3>
-        <p>Nom d'artiste : Exemplar</p>
-        <p>Ville : Douala</p>
-      </div>
-      <div class="profile-card">
-        <h3>Artiste 2</h3>
-        <p>Nom d'artiste : Créatif</p>
-        <p>Ville : Yaoundé</p>
-      </div>
+    <!-- Battles Section -->
+    <section class="section battles-section" id="battles">
+        <div class="container">
+            <h2 class="section-title">Battles <span>en cours</span></h2>
+            
+            <div class="battles-container">
+                <div class="battles-filters">
+                    <div class="filter-group">
+                        <h3 class="filter-title">Pays</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked> Cameroun
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Nigeria
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Sénégal
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Côte d'Ivoire
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Afrique du Sud
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Genre</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked> Afrobeat
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Makossa
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Rap/Hip-Hop
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> R&B
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Dancehall
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Statut</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="radio" name="status" checked> En cours
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="status"> Terminés
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="status"> À venir
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;">Appliquer les filtres</button>
+                </div>
+                
+                <div class="battles-grid">
+                    <!-- Battle 1 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status">En cours</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Afrobeat Showdown</h3>
+                            <p class="battle-artists">Afro Queen vs. Dance King</p>
+                            <p>Qui dominera la scène afrobeat avec le meilleur flow et les rythmes les plus entraînants?</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 2,458 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 3 jours restants
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle 2 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status">En cours</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Rap Challenge</h3>
+                            <p class="battle-artists">Rap Master vs. Lyric Genius</p>
+                            <p>Bataille de rap avec des punchlines cinglantes et des flows dévastateurs. Qui l'emportera?</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 1,897 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 1 jour restant
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle 3 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status ended">Terminé</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Makossa Fusion</h3>
+                            <p class="battle-artists">Makossa Man vs. Electro Sound</p>
+                            <p>Confrontation entre tradition et modernité dans le makossa revisité.</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 3,210 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-trophy"></i> Makossa Man gagnant
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-outline" style="width: 100%; margin-top: 15px;">Voir les résultats</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Section Résultats -->
-    <section id="resultats">
-      <h2>Résultats</h2>
-      <p>Suivez l'évolution des votes :</p>
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Position</th>
-            <th>Nom d'artiste</th>
-            <th>Votes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Exemplar</td>
-            <td>1500</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Créatif</td>
-            <td>1200</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Battle Detail -->
+    <section class="battle-detail">
+        <div class="container">
+            <div class="battle-header-detail" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'); background-size: cover; background-position: center;">
+                <div class="battle-header-overlay">
+                    <h2 class="battle-title-detail">Afrobeat Showdown</h2>
+                    <p class="battle-artists-detail">Afro Queen vs. Dance King</p>
+                    <div class="battle-timer">
+                        <i class="fas fa-clock"></i> 3 jours restants
+                    </div>
+                </div>
+            </div>
+            
+            <div class="battle-content-detail">
+                <div class="battle-main">
+                    <p class="battle-description">
+                        Le plus grand battle d'Afrobeat de l'année ! Deux artistes phénoménaux s'affrontent pour le titre de Roi et Reine de l'Afrobeat. Afro Queen apporte son flow unique et ses mélodies envoûtantes, tandis que Dance King impressionne avec ses rythmes entraînants et son énergie contagieuse. Qui mérite votre vote ?
+                    </p>
+                    
+                    <h3>Les participants</h3>
+                    
+                    <div class="contestants">
+                        <!-- Contestant 1 -->
+                        <div class="contestant">
+                            <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Afro Queen" class="contestant-image">
+                            <h3 class="contestant-name">Afro Queen</h3>
+                            <span class="contestant-country">Nigeria</span>
+                            <p>Spécialiste de l'Afrobeat avec des influences modernes. 5 ans d'expérience et 3 albums à succès.</p>
+                            
+                            <audio controls style="width: 100%; margin-top: 20px;">
+                                <source src="#" type="audio/mpeg">
+                                Votre navigateur ne supporte pas l'élément audio.
+                            </audio>
+                            
+                            <button class="vote-btn contestant1">
+                                <i class="fas fa-vote-yea"></i> Voter pour Afro Queen
+                            </button>
+                            
+                            <div class="vote-stats">
+                                <div class="vote-progress">
+                                    <div class="vote-progress-bar contestant1"></div>
+                                </div>
+                                <div class="vote-percentage">
+                                    <span>Afro Queen</span>
+                                    <span>65%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contestant 2 -->
+                        <div class="contestant">
+                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dance King" class="contestant-image">
+                            <h3 class="contestant-name">Dance King</h3>
+                            <span class="contestant-country">Ghana</span>
+                            <p>Artiste énergique connu pour ses performances scéniques époustouflantes et ses beats entraînants.</p>
+                            
+                            <audio controls style="width: 100%; margin-top: 20px;">
+                                <source src="#" type="audio/mpeg">
+                                Votre navigateur ne supporte pas l'élément audio.
+                            </audio>
+                            
+                            <button class="vote-btn contestant2">
+                                <i class="fas fa-vote-yea"></i> Voter pour Dance King
+                            </button>
+                            
+                            <div class="vote-stats">
+                                <div class="vote-progress">
+                                    <div class="vote-progress-bar contestant2"></div>
+                                </div>
+                                <div class="vote-percentage">
+                                    <span>Dance King</span>
+                                    <span>35%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vote-count">
+                        2,458 votes
+                    </div>
+                </div>
+                
+                <div class="sidebar">
+                    <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px;">
+                        <h3>Comment voter</h3>
+                        <p>1. Écoutez les extraits musicaux des deux artistes</p>
+                        <p>2. Cliquez sur "Voter" sous votre artiste préféré</p>
+                        <p>3. Connectez-vous ou créez un compte gratuit</p>
+                        <p>4. Confirmez votre vote</p>
+                        <p><em>Note: Vous ne pouvez voter qu'une seule fois par battle.</em></p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                        <h3>Partager ce battle</h3>
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button style="flex: 1; padding: 10px; background: #3b5998; color: white; border: none; border-radius: 5px;">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button style="flex: 1; padding: 10px; background: #1da1f2; color: white; border: none; border-radius: 5px;">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button style="flex: 1; padding: 10px; background: #c32aa3; color: white; border: none; border-radius: 5px;">
+                                <i class="fab fa-instagram"></i>
+                            </button>
+                            <button style="flex: 1; padding: 10px; background: #25d366; color: white; border: none; border-radius: 5px;">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Section Contacts -->
-    <section id="contact">
-      <h2>Contacts</h2>
-      <div class="contact-details">
-        <p>Pour toute question, contactez-nous :</p>
-        <p>
-          Email : <a href="mailto:contact@cinexoproductions.com">contact@cinexoproductions.com</a><br>
-          WhatsApp : <a href="https://wa.me/237699853665" target="_blank">+237 699 85 36 65</a>
-        </p>
-      </div>
+    <!-- Rankings Section -->
+    <section class="section rankings-section" id="rankings">
+        <div class="container">
+            <h2 class="section-title rankings-title">Classements <span>des artistes</span></h2>
+            
+            <div class="ranking-tabs">
+                <div class="ranking-tab active">Global</div>
+                <div class="ranking-tab">Cameroun</div>
+                <div class="ranking-tab">Nigeria</div>
+                <div class="ranking-tab">Sénégal</div>
+                <div class="ranking-tab">Afrique du Sud</div>
+            </div>
+            
+            <div class="ranking-list">
+                <div class="ranking-header">
+                    <div>#</div>
+                    <div>Artiste</div>
+                    <div>Victoires</div>
+                    <div>Votes</div>
+                </div>
+                
+                <!-- Ranking Item 1 -->
+                <div class="ranking-item">
+                    <div class="ranking-position">1</div>
+                    <div class="ranking-artist">
+                        <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
+                        Makossa Man
+                    </div>
+                    <div>18</div>
+                    <div>24,587</div>
+                </div>
+                
+                <!-- Ranking Item 2 -->
+                <div class="ranking-item">
+                    <div class="ranking-position">2</div>
+                    <div class="ranking-artist">
+                        <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
+                        Afro Queen
+                    </div>
+                    <div>15</div>
+                    <div>21,432</div>
+                </div>
+                
+                <!-- Ranking Item 3 -->
+                <div class="ranking-item">
+                    <div class="ranking-position">3</div>
+                    <div class="ranking-artist">
+                        <img src="https://images.unsplash.com/photo-1517232115160-ff93364542dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
+                        Rap Master
+                    </div>
+                    <div>16</div>
+                    <div>19,876</div>
+                </div>
+                
+                <!-- Ranking Item 4 -->
+                <div class="ranking-item">
+                    <div class="ranking-position">4</div>
+                    <div class="ranking-artist">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
+                        Dance King
+                    </div>
+                    <div>12</div>
+                    <div>18,543</div>
+                </div>
+                
+                <!-- Ranking Item 5 -->
+                <div class="ranking-item">
+                    <div class="ranking-position">5</div>
+                    <div class="ranking-artist">
+                        <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Artist" class="ranking-artist-img">
+                        Soul Diva
+                    </div>
+                    <div>12</div>
+                    <div>17,890</div>
+                </div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <!-- Footer complémentaire -->
-  <footer>
-    <p>&copy; 2025 Cinexo Productions. Tous droits réservés.</p>
-  </footer>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <i class="fas fa-music logo-icon"></i>
+                        <div class="logo-text">ZONE <span class="logo-vs">VS</span> MUZIK</div>
+                    </div>
+                    <p>La plateforme ultime de battles musicaux pour artistes africains. Découvrez, votez, partagez !</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#battles">Battles</a></li>
+                        <li><a href="#artists">Artistes</a></li>
+                        <li><a href="#rankings">Classements</a></li>
+                        <li><a href="#about">À propos</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Pour les artistes</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Créer un profil</a></li>
+                        <li><a href="#">Lancer un battle</a></li>
+                        <li><a href="#">Statistiques</a></li>
+                        <li><a href="#">Devenir artiste vérifié</a></li>
+                        <li><a href="#">Programme de récompenses</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@zonevsmuzik.com</li>
+                        <li><i class="fas fa-phone"></i> +237 123 456 789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Yaoundé, Cameroun</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 20px;">Newsletter</h3>
+                    <form style="margin-top: 10px;">
+                        <input type="email" placeholder="Votre email" style="width: 100%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 10px;">
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ZONE VS MUZIK. Tous droits réservés. | Conçu avec passion pour la musique africaine</p>
+            </div>
+        </div>
+    </footer>
 
-  <script>
-    // Gestion des onglets pour la section Compte (Inscription / Connexion)
-    const tabRegister = document.getElementById('tabRegister');
-    const tabLogin = document.getElementById('tabLogin');
-    const registerForm = document.getElementById('registerForm');
-    const loginForm = document.getElementById('loginForm');
-
-    tabRegister.addEventListener('click', () => {
-      tabRegister.classList.add('active');
-      tabLogin.classList.remove('active');
-      registerForm.classList.add('active');
-      loginForm.classList.remove('active');
-    });
-
-    tabLogin.addEventListener('click', () => {
-      tabLogin.classList.add('active');
-      tabRegister.classList.remove('active');
-      loginForm.classList.add('active');
-      registerForm.classList.remove('active');
-    });
-
-    // Gestion du formulaire d'inscription
-    document.getElementById('signupForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert("Inscription enregistrée ! (Intégration backend à venir)");
-    });
-    // Gestion du formulaire de connexion
-    document.getElementById('userLoginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert("Connexion réussie ! (Intégration backend à venir)");
-    });
-  </script>
+    <script>
+        // Hero Slider
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        // Auto slide
+        setInterval(() => {
+            let nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+        }, 5000);
+        
+        // Add click events to indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // Vote button animation
+        const voteButtons = document.querySelectorAll('.vote-btn');
+        voteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Animation effect
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+                
+                // In a real app, this would trigger the voting system
+                alert('Pour voter, vous devez être connecté. Redirection vers la page de connexion...');
+            });
+        });
+        
+        // Responsive menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const userActions = document.querySelector('.user-actions');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            userActions.style.display = userActions.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'var(--anthracite)';
+                navLinks.style.padding = '20px';
+                navLinks.style.gap = '15px';
+                
+                userActions.style.position = 'absolute';
+                userActions.style.top = '250px';
+                userActions.style.left = '0';
+                userActions.style.right = '0';
+                userActions.style.backgroundColor = 'var(--anthracite)';
+                userActions.style.padding = '20px';
+                userActions.style.flexDirection = 'column';
+                userActions.style.gap = '15px';
+            }
+        });
+        
+        // Tab switching for rankings
+        const rankingTabs = document.querySelectorAll('.ranking-tab');
+        rankingTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                rankingTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

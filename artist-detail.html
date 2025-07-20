@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makossa Man | ZONE VS MUZIK</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green: #009639;
+            --red: #CE1126;
+            --yellow: #FCD116;
+            --anthracite: #2E2E2E;
+            --white: #FFFFFF;
+            --orange: #FF6B00;
+            --fuchsia: #D6007E;
+            --gray-light: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--anthracite);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #007a2b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0b500;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--yellow);
+            color: var(--yellow);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--anthracite);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--yellow);
+            font-size: 1.8rem;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        .logo-vs {
+            color: var(--red);
+            margin: 0 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--yellow);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--yellow);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Artist Header */
+        .artist-header {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .artist-header-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .artist-header-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(to top, rgba(46, 46, 46, 0.9), transparent);
+            z-index: -1;
+        }
+
+        .artist-header-content {
+            padding: 40px;
+            color: white;
+            width: 100%;
+        }
+
+        .artist-name {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .artist-country {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .artist-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .artist-stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--yellow);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .artist-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Artist Content */
+        .artist-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .artist-bio {
+            margin-bottom: 40px;
+        }
+
+        .artist-bio h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--green);
+        }
+
+        .artist-bio p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .artist-battles {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--anthracite);
+            border-bottom: 2px solid var(--yellow);
+            padding-bottom: 10px;
+        }
+
+        .battle-history {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .battle-item {
+            background: var(--gray-light);
+            border-radius: 10px;
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .battle-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .battle-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .battle-artists {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .battle-result {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .battle-won {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .battle-lost {
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .battle-draw {
+            color: #777;
+            font-weight: 600;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--anthracite);
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .artist-details {
+            list-style: none;
+        }
+
+        .artist-details li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .artist-details li i {
+            color: var(--green);
+            margin-top: 4px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--anthracite);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--green);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--anthracite);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--yellow);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+            padding-left: 5px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .footer-social-link:hover {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .artist-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links, .user-actions {
+                display: none;
+            }
+            
+            .artist-header {
+                height: 400px;
+            }
+            
+            .artist-name {
+                font-size: 2.5rem;
+            }
+            
+            .artist-stats {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .artist-name {
+                font-size: 2rem;
+            }
+            
+            .artist-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-music logo-icon"></i>
+                <div class="logo-text">ZONE <span class="logo-vs">VS</span> MUZIK</div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="battles.html">Battles</a>
+                <a href="artists.html">Artistes</a>
+                <a href="rankings.html">Classements</a>
+                <a href="about.html">À propos</a>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="login.html" class="btn btn-outline">Connexion</a>
+                <a href="signup.html" class="btn btn-primary">Inscription</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Artist Header -->
+    <section class="artist-header">
+        <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Makossa Man" class="artist-header-image">
+        <div class="artist-header-overlay"></div>
+        <div class="container artist-header-content">
+            <h1 class="artist-name">Makossa Man</h1>
+            <div class="artist-country">
+                <i class="fas fa-map-marker-alt"></i> Douala, Cameroun
+                <span class="verified-badge" style="background: var(--yellow); color: var(--anthracite); padding: 3px 10px; border-radius: 20px; font-size: 0.9rem;">
+                    <i class="fas fa-check"></i> Artiste Vérifié
+                </span>
+            </div>
+            
+            <div class="artist-stats">
+                <div class="artist-stat">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Battles</div>
+                </div>
+                <div class="artist-stat">
+                    <div class="stat-value">18</div>
+                    <div class="stat-label">Victoires</div>
+                </div>
+                <div class="artist-stat">
+                    <div class="stat-value">75%</div>
+                    <div class="stat-label">Taux de victoire</div>
+                </div>
+                <div class="artist-stat">
+                    <div class="stat-value">2.4K</div>
+                    <div class="stat-label">Abonnés</div>
+                </div>
+            </div>
+            
+            <div class="artist-actions">
+                <button class="btn btn-primary"><i class="fas fa-plus"></i> S'abonner</button>
+                <button class="btn btn-outline"><i class="fas fa-share-alt"></i> Partager</button>
+                <button class="btn btn-outline"><i class="fas fa-envelope"></i> Contacter</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artist Content -->
+    <section class="container artist-content">
+        <div class="artist-main">
+            <div class="artist-bio">
+                <h2>Biographie</h2>
+                <p>Makossa Man, de son vrai nom Jean Ndongo, est un artiste camerounais révolutionnaire qui a su moderniser le Makossa traditionnel en y intégrant des éléments électro et pop. Né à Douala en 1990, il a grandi dans une famille de musiciens où il a été initié très tôt aux rythmes traditionnels camerounais.</p>
+                
+                <p>Après des études en production musicale à Paris, il retourne au Cameroun en 2015 avec une vision claire : créer une fusion entre les sons ancestraux et les tendances contemporaines. Son premier album "Renaissance Makossa" (2017) a été un succès immédiat, propulsant Makossa Man sur la scène internationale.</p>
+                
+                <p>Avec plus de 24 battles à son actif et 18 victoires, Makossa Man est aujourd'hui considéré comme l'un des ambassadeurs de la nouvelle scène musicale africaine. Ses performances énergiques et son style unique lui ont valu une place dans le top 3 des artistes africains sur ZONE VS MUZIK.</p>
+                
+                <p>"Mon objectif est de montrer au monde la richesse de notre patrimoine musical tout en créant des sons qui parlent à la jeunesse d'aujourd'hui." - Makossa Man</p>
+            </div>
+            
+            <div class="artist-battles">
+                <h2 class="section-title">Historique des Battles</h2>
+                <div class="battle-history">
+                    <div class="battle-item">
+                        <h3 class="battle-title">Makossa Fusion</h3>
+                        <p class="battle-artists">vs. Electro Sound</p>
+                        <p>Confrontation entre tradition et modernité dans le makossa revisité.</p>
+                        <div class="battle-result">
+                            <span>12/10/2023</span>
+                            <span class="battle-won">Victoire</span>
+                        </div>
+                    </div>
+                    
+                    <div class="battle-item">
+                        <h3 class="battle-title">Afrobeat Challenge</h3>
+                        <p class="battle-artists">vs. Afro Queen</p>
+                        <p>Duel épique entre deux poids lourds de la scène africaine.</p>
+                        <div class="battle-result">
+                            <span>25/09/2023</span>
+                            <span class="battle-lost">Défaite</span>
+                        </div>
+                    </div>
+                    
+                    <div class="battle-item">
+                        <h3 class="battle-title">Rythmes Urbains</h3>
+                        <p class="battle-artists">vs. Rap Master</p>
+                        <p>Fusion Makossa vs. Rap engagé dans un battle intergénérationnel.</p>
+                        <div class="battle-result">
+                            <span>05/09/2023</span>
+                            <span class="battle-won">Victoire</span>
+                        </div>
+                    </div>
+                    
+                    <div class="battle-item">
+                        <h3 class="battle-title">Summer Vibes</h3>
+                        <p class="battle-artists">vs. Dance King</p>
+                        <p>Battle estival avec des rythmes entraînants et des mélodies ensoleillées.</p>
+                        <div class="battle-result">
+                            <span>15/08/2023</span>
+                            <span class="battle-won">Victoire</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Informations</h3>
+                <ul class="artist-details">
+                    <li>
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <strong>Nom réel:</strong> Jean Ndongo
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-birthday-cake"></i>
+                        <div>
+                            <strong>Date de naissance:</strong> 12 mars 1990
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Ville:</strong> Douala, Cameroun
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-music"></i>
+                        <div>
+                            <strong>Genres:</strong> Makossa, Afro-fusion, Électro
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-calendar-alt"></i>
+                        <div>
+                            <strong>Début de carrière:</strong> 2015
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <strong>Récompenses:</strong> 3 trophées ZONE VS MUZIK
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Réseaux sociaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Dernières œuvres</h3>
+                <div style="margin-top: 15px;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <img src="https://via.placeholder.com/60" alt="Single" style="width: 60px; height: 60px; border-radius: 5px;">
+                        <div>
+                            <strong>Makossa Revolution</strong>
+                            <p>Single • 2023</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <img src="https://via.placeholder.com/60" alt="Album" style="width: 60px; height: 60px; border-radius: 5px;">
+                        <div>
+                            <strong>Heritage</strong>
+                            <p>Album • 2022</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <img src="https://via.placeholder.com/60" alt="EP" style="width: 60px; height: 60px; border-radius: 5px;">
+                        <div>
+                            <strong>Urban Vibes</strong>
+                            <p>EP • 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <i class="fas fa-music logo-icon"></i>
+                        <div class="logo-text">ZONE <span class="logo-vs">VS</span> MUZIK</div>
+                    </div>
+                    <p>La plateforme ultime de battles musicaux pour artistes africains. Découvrez, votez, partagez !</p>
+                    <div class="footer-social-links">
+                        <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="battles.html">Battles</a></li>
+                        <li><a href="artists.html">Artistes</a></li>
+                        <li><a href="rankings.html">Classements</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Pour les artistes</h3>
+                    <ul class="footer-links">
+                        <li><a href="signup.html">Créer un profil</a></li>
+                        <li><a href="create-battle.html">Lancer un battle</a></li>
+                        <li><a href="#">Devenir artiste vérifié</a></li>
+                        <li><a href="#">Statistiques</a></li>
+                        <li><a href="#">Programme de récompenses</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@zonevsmuzik.com</li>
+                        <li><i class="fas fa-phone"></i> +237 123 456 789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Yaoundé, Cameroun</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 20px;">Newsletter</h3>
+                    <form style="margin-top: 10px;">
+                        <input type="email" placeholder="Votre email" style="width: 100%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 10px;">
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ZONE VS MUZIK. Tous droits réservés. | Conçu avec passion pour la musique africaine</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Responsive menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const userActions = document.querySelector('.user-actions');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            userActions.style.display = userActions.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'var(--anthracite)';
+                navLinks.style.padding = '20px';
+                navLinks.style.gap = '15px';
+                
+                userActions.style.position = 'absolute';
+                userActions.style.top = '250px';
+                userActions.style.left = '0';
+                userActions.style.right = '0';
+                userActions.style.backgroundColor = 'var(--anthracite)';
+                userActions.style.padding = '20px';
+                userActions.style.flexDirection = 'column';
+                userActions.style.gap = '15px';
+            }
+        });
+        
+        // Subscription button
+        const subscribeBtn = document.querySelector('.btn-primary');
+        subscribeBtn.addEventListener('click', function() {
+            if (this.innerHTML.includes('S\'abonner')) {
+                this.innerHTML = '<i class="fas fa-check"></i> Abonné';
+                this.style.background = 'var(--red)';
+                alert('Vous êtes maintenant abonné à Makossa Man !');
+            } else {
+                this.innerHTML = '<i class="fas fa-plus"></i> S\'abonner';
+                this.style.background = 'var(--green)';
+                alert('Vous avez annulé votre abonnement à Makossa Man.');
+            }
+        });
+    </script>
+</body>
+</html>

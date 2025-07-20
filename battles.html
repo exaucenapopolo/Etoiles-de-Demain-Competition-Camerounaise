@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battles en cours | ZONE VS MUZIK</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green: #009639;
+            --red: #CE1126;
+            --yellow: #FCD116;
+            --anthracite: #2E2E2E;
+            --white: #FFFFFF;
+            --orange: #FF6B00;
+            --fuchsia: #D6007E;
+            --gray-light: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--anthracite);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #007a2b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0b500;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--yellow);
+            color: var(--yellow);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--anthracite);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--yellow);
+            font-size: 1.8rem;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        .logo-vs {
+            color: var(--red);
+            margin: 0 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--yellow);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--yellow);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(45deg, var(--anthracite), #1a1a1a);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Battles Section */
+        .battles-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--anthracite);
+        }
+
+        .section-title span {
+            color: var(--green);
+        }
+
+        .battles-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .battles-filters {
+            flex: 0 0 250px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--anthracite);
+            font-weight: 600;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .battles-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .battle-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .battle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .battle-header {
+            position: relative;
+            height: 180px;
+        }
+
+        .battle-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .battle-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--green);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .battle-status.ended {
+            background-color: var(--red);
+        }
+
+        .battle-content {
+            padding: 20px;
+        }
+
+        .battle-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .battle-artists {
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .battle-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+
+        .page-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--gray-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .page-item.active {
+            background: var(--green);
+            color: white;
+        }
+
+        .page-item:hover:not(.active) {
+            background: #e0e0e0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--anthracite);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--yellow);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--yellow);
+            color: var(--anthracite);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .page-title {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links, .user-actions {
+                display: none;
+            }
+            
+            .battles-container {
+                flex-direction: column;
+            }
+            
+            .battles-filters {
+                flex: 1;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-music logo-icon"></i>
+                <div class="logo-text">ZONE <span class="logo-vs">VS</span> MUZIK</div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="battles.html" class="active">Battles</a>
+                <a href="artists.html">Artistes</a>
+                <a href="rankings.html">Classements</a>
+                <a href="about.html">À propos</a>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="login.html" class="btn btn-outline">Connexion</a>
+                <a href="signup.html" class="btn btn-primary">Inscription</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Battles Musicaux</h1>
+            <p class="page-subtitle">Découvrez les battles en cours, votez pour vos artistes préférés et participez à l'émergence de nouveaux talents africains.</p>
+        </div>
+    </section>
+
+    <!-- Battles Section -->
+    <section class="battles-section">
+        <div class="container">
+            <h2 class="section-title">Battles <span>en cours</span></h2>
+            
+            <div class="battles-container">
+                <div class="battles-filters">
+                    <div class="filter-group">
+                        <h3 class="filter-title">Pays</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked> Cameroun
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Nigeria
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Sénégal
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Côte d'Ivoire
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Afrique du Sud
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Genre</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked> Afrobeat
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Makossa
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Rap/Hip-Hop
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> R&B
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Dancehall
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Statut</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="radio" name="status" checked> En cours
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="status"> Terminés
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="status"> À venir
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Popularité</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="radio" name="popularity" checked> Tous
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="popularity"> Populaires
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="popularity"> Moins populaires
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;">Appliquer les filtres</button>
+                </div>
+                
+                <div class="battles-grid">
+                    <!-- Battle 1 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status">En cours</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Afrobeat Showdown</h3>
+                            <p class="battle-artists">Afro Queen vs. Dance King</p>
+                            <p>Qui dominera la scène afrobeat avec le meilleur flow et les rythmes les plus entraînants?</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 2,458 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 3 jours restants
+                                </div>
+                            </div>
+                            <a href="battle-detail.html" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle 2 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status">En cours</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Rap Challenge</h3>
+                            <p class="battle-artists">Rap Master vs. Lyric Genius</p>
+                            <p>Bataille de rap avec des punchlines cinglantes et des flows dévastateurs. Qui l'emportera?</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 1,897 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 1 jour restant
+                                </div>
+                            </div>
+                            <a href="battle-detail.html" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle 3 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status ended">Terminé</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Makossa Fusion</h3>
+                            <p class="battle-artists">Makossa Man vs. Electro Sound</p>
+                            <p>Confrontation entre tradition et modernité dans le makossa revisité.</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 3,210 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-trophy"></i> Makossa Man gagnant
+                                </div>
+                            </div>
+                            <a href="battle-detail.html" class="btn btn-outline" style="width: 100%; margin-top: 15px;">Voir les résultats</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle 4 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status">En cours</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">R&B Soul Clash</h3>
+                            <p class="battle-artists">Soul Diva vs. Melody Queen</p>
+                            <p>Deux voix exceptionnelles s'affrontent dans un duel de mélodies envoûtantes.</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 1,542 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 5 jours restants
+                                </div>
+                            </div>
+                            <a href="battle-detail.html" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle 5 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status">En cours</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Dancehall Riddim</h3>
+                            <p class="battle-artists">Dance King vs. Reggae Master</p>
+                            <p>Bataille de rythmes dancehall et d'énergie scénique explosive.</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 2,105 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 2 jours restants
+                                </div>
+                            </div>
+                            <a href="battle-detail.html" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle 6 -->
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <img src="https://images.unsplash.com/photo-1517232115160-ff93364542dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Battle" class="battle-image">
+                            <div class="battle-status ended">Terminé</div>
+                        </div>
+                        <div class="battle-content">
+                            <h3 class="battle-title">Hip-Hop Revolution</h3>
+                            <p class="battle-artists">Urban Poet vs. Street King</p>
+                            <p>Confrontation de rap engagé sur des problématiques sociales.</p>
+                            <div class="battle-stats">
+                                <div>
+                                    <i class="fas fa-users"></i> 2,876 votes
+                                </div>
+                                <div>
+                                    <i class="fas fa-trophy"></i> Urban Poet gagnant
+                                </div>
+                            </div>
+                            <a href="battle-detail.html" class="btn btn-outline" style="width: 100%; margin-top: 15px;">Voir les résultats</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <div class="page-item">1</div>
+                <div class="page-item active">2</div>
+                <div class="page-item">3</div>
+                <div class="page-item">4</div>
+                <div class="page-item">5</div>
+                <div class="page-item">»</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <i class="fas fa-music logo-icon"></i>
+                        <div class="logo-text">ZONE <span class="logo-vs">VS</span> MUZIK</div>
+                    </div>
+                    <p>La plateforme ultime de battles musicaux pour artistes africains. Découvrez, votez, partagez !</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="battles.html" class="active">Battles</a></li>
+                        <li><a href="artists.html">Artistes</a></li>
+                        <li><a href="rankings.html">Classements</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Pour les artistes</h3>
+                    <ul class="footer-links">
+                        <li><a href="signup.html">Créer un profil</a></li>
+                        <li><a href="create-battle.html">Lancer un battle</a></li>
+                        <li><a href="#">Devenir artiste vérifié</a></li>
+                        <li><a href="#">Statistiques</a></li>
+                        <li><a href="#">Programme de récompenses</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@zonevsmuzik.com</li>
+                        <li><i class="fas fa-phone"></i> +237 123 456 789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Yaoundé, Cameroun</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 20px;">Newsletter</h3>
+                    <form style="margin-top: 10px;">
+                        <input type="email" placeholder="Votre email" style="width: 100%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 10px;">
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ZONE VS MUZIK. Tous droits réservés. | Conçu avec passion pour la musique africaine</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Responsive menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const userActions = document.querySelector('.user-actions');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            userActions.style.display = userActions.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'var(--anthracite)';
+                navLinks.style.padding = '20px';
+                navLinks.style.gap = '15px';
+                
+                userActions.style.position = 'absolute';
+                userActions.style.top = '250px';
+                userActions.style.left = '0';
+                userActions.style.right = '0';
+                userActions.style.backgroundColor = 'var(--anthracite)';
+                userActions.style.padding = '20px';
+                userActions.style.flexDirection = 'column';
+                userActions.style.gap = '15px';
+            }
+        });
+        
+        // Pagination interaction
+        const pageItems = document.querySelectorAll('.page-item');
+        pageItems.forEach(item => {
+            item.addEventListener('click', function() {
+                pageItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

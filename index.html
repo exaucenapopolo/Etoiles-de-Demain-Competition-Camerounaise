@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Variables et styles de base */
         :root {
             --green: #009639;
             --red: #CE1126;
@@ -90,6 +91,26 @@
         .btn-outline:hover {
             background-color: var(--yellow);
             color: var(--anthracite);
+        }
+
+        .btn-pro {
+            background: linear-gradient(45deg, var(--fuchsia), var(--orange));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-pro::after {
+            content: "PRO";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            transform: rotate(15deg);
         }
 
         /* Header Styles */
@@ -285,6 +306,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
         .artist-card:hover {
@@ -335,6 +357,33 @@
         .stat-label {
             font-size: 0.85rem;
             color: #777;
+        }
+
+        .subscribe-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .subscribe-btn:hover {
+            background: var(--yellow);
+            transform: scale(1.1);
+        }
+
+        .subscribe-btn.subscribed {
+            background: var(--red);
+            color: white;
         }
 
         /* Battles Section */
@@ -515,6 +564,7 @@
             text-align: center;
             padding: 30px;
             transition: var(--transition);
+            position: relative;
         }
 
         .contestant:hover {
@@ -679,6 +729,88 @@
             object-fit: cover;
         }
 
+        /* Subscription System */
+        .subscription-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .plan-card.pro {
+            border: 2px solid var(--yellow);
+            transform: scale(1.05);
+        }
+
+        .plan-card.pro:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .plan-card.pro::before {
+            content: "POPULAIRE";
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: var(--red);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--anthracite);
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--green);
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-features li i {
+            color: var(--green);
+        }
+
         /* Footer */
         footer {
             background-color: var(--anthracite);
@@ -759,6 +891,130 @@
             font-size: 0.9rem;
         }
 
+        /* Authentication Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(-50px);
+            transition: transform 0.4s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            background: var(--anthracite);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-tabs {
+            display: flex;
+            background: var(--gray-light);
+        }
+
+        .modal-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-tab.active {
+            background: white;
+            font-weight: 600;
+        }
+
+        .modal-content {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .account-type {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .type-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .type-option.active {
+            border-color: var(--green);
+            background: rgba(0, 150, 57, 0.1);
+        }
+
+        .type-option i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--anthracite);
+        }
+
+        .type-option.active i {
+            color: var(--green);
+        }
+
         /* Responsive Styles */
         @media (max-width: 992px) {
             .hero-title {
@@ -803,6 +1059,10 @@
             .section {
                 padding: 60px 0;
             }
+            
+            .account-type {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 576px) {
@@ -844,16 +1104,22 @@
             </div>
             
             <nav class="nav-links">
-                <a href="#home">Accueil</a>
-                <a href="#battles">Battles</a>
-                <a href="#artists">Artistes</a>
-                <a href="#rankings">Classements</a>
-                <a href="#about">À propos</a>
+                <a href="index.html">Accueil</a>
+                <a href="battles.html">Battles</a>
+                <a href="artists.html">Artistes</a>
+                <a href="rankings.html">Classements</a>
+                <a href="about.html">À propos</a>
             </nav>
             
             <div class="user-actions">
-                <a href="#" class="btn btn-outline">Connexion</a>
-                <a href="#" class="btn btn-primary">Inscription</a>
+                <div id="guest-actions">
+                    <a href="#" class="btn btn-outline" id="login-btn">Connexion</a>
+                    <a href="#" class="btn btn-primary" id="signup-btn">Inscription</a>
+                </div>
+                <div id="user-actions" style="display: none;">
+                    <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-user"></i> Mon Compte</a>
+                    <a href="#" class="btn btn-pro"><i class="fas fa-crown"></i> Compte Pro</a>
+                </div>
             </div>
             
             <button class="mobile-menu-btn">
@@ -870,7 +1136,7 @@
                 <div class="hero-content">
                     <h1 class="hero-title">Découvrez les talents musicaux de l'Afrique</h1>
                     <p class="hero-subtitle">Votez pour vos artistes préférés, participez à des battles épiques et faites monter les meilleurs talents en haut des classements.</p>
-                    <a href="#battles" class="btn btn-primary">Voter maintenant</a>
+                    <a href="battles.html" class="btn btn-primary">Voter maintenant</a>
                 </div>
             </div>
         </div>
@@ -881,7 +1147,7 @@
                 <div class="hero-content">
                     <h1 class="hero-title">La scène musicale africaine comme vous ne l'avez jamais vue</h1>
                     <p class="hero-subtitle">Des battles palpitants entre artistes émergents et établis de tout le continent.</p>
-                    <a href="#battles" class="btn btn-primary">Voir les battles</a>
+                    <a href="battles.html" class="btn btn-primary">Voir les battles</a>
                 </div>
             </div>
         </div>
@@ -900,6 +1166,7 @@
             <div class="artists-grid">
                 <!-- Artist 1 -->
                 <div class="artist-card">
+                    <button class="subscribe-btn" data-artist="makossa-man"><i class="fas fa-heart"></i></button>
                     <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="artist-image">
                     <div class="artist-info">
                         <h3 class="artist-name">Makossa Man</h3>
@@ -915,8 +1182,8 @@
                                 <div class="stat-label">Victoires</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-value">86%</div>
-                                <div class="stat-label">Win rate</div>
+                                <div class="stat-value">2.4K</div>
+                                <div class="stat-label">Abonnés</div>
                             </div>
                         </div>
                     </div>
@@ -924,6 +1191,7 @@
                 
                 <!-- Artist 2 -->
                 <div class="artist-card">
+                    <button class="subscribe-btn" data-artist="afro-queen"><i class="fas fa-heart"></i></button>
                     <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="artist-image">
                     <div class="artist-info">
                         <h3 class="artist-name">Afro Queen</h3>
@@ -939,8 +1207,8 @@
                                 <div class="stat-label">Victoires</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-value">79%</div>
-                                <div class="stat-label">Win rate</div>
+                                <div class="stat-value">3.1K</div>
+                                <div class="stat-label">Abonnés</div>
                             </div>
                         </div>
                     </div>
@@ -948,6 +1216,7 @@
                 
                 <!-- Artist 3 -->
                 <div class="artist-card">
+                    <button class="subscribe-btn" data-artist="rap-master"><i class="fas fa-heart"></i></button>
                     <img src="https://images.unsplash.com/photo-1517232115160-ff93364542dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="artist-image">
                     <div class="artist-info">
                         <h3 class="artist-name">Rap Master</h3>
@@ -963,8 +1232,8 @@
                                 <div class="stat-label">Victoires</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-value">73%</div>
-                                <div class="stat-label">Win rate</div>
+                                <div class="stat-value">1.8K</div>
+                                <div class="stat-label">Abonnés</div>
                             </div>
                         </div>
                     </div>
@@ -972,6 +1241,7 @@
                 
                 <!-- Artist 4 -->
                 <div class="artist-card">
+                    <button class="subscribe-btn" data-artist="soul-diva"><i class="fas fa-heart"></i></button>
                     <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Artist" class="artist-image">
                     <div class="artist-info">
                         <h3 class="artist-name">Soul Diva</h3>
@@ -987,8 +1257,8 @@
                                 <div class="stat-label">Victoires</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-value">71%</div>
-                                <div class="stat-label">Win rate</div>
+                                <div class="stat-value">2.1K</div>
+                                <div class="stat-label">Abonnés</div>
                             </div>
                         </div>
                     </div>
@@ -1083,7 +1353,7 @@
                                     <i class="fas fa-clock"></i> 3 jours restants
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                            <a href="battle-detail.html" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
                         </div>
                     </div>
                     
@@ -1105,7 +1375,7 @@
                                     <i class="fas fa-clock"></i> 1 jour restant
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
+                            <a href="battle-detail.html" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Voter maintenant</a>
                         </div>
                     </div>
                     
@@ -1127,7 +1397,7 @@
                                     <i class="fas fa-trophy"></i> Makossa Man gagnant
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-outline" style="width: 100%; margin-top: 15px;">Voir les résultats</a>
+                            <a href="battle-detail.html" class="btn btn-outline" style="width: 100%; margin-top: 15px;">Voir les résultats</a>
                         </div>
                     </div>
                 </div>
@@ -1135,194 +1405,41 @@
         </div>
     </section>
 
-    <!-- Battle Detail -->
-    <section class="battle-detail">
+    <!-- Subscription Section -->
+    <section class="section">
         <div class="container">
-            <div class="battle-header-detail" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'); background-size: cover; background-position: center;">
-                <div class="battle-header-overlay">
-                    <h2 class="battle-title-detail">Afrobeat Showdown</h2>
-                    <p class="battle-artists-detail">Afro Queen vs. Dance King</p>
-                    <div class="battle-timer">
-                        <i class="fas fa-clock"></i> 3 jours restants
-                    </div>
-                </div>
-            </div>
+            <h2 class="section-title">Comptes <span>Artistes Pro</span></h2>
+            <p class="text-center" style="max-width: 700px; margin: 0 auto 50px;">
+                Rejoignez notre programme exclusif pour artistes professionnels et bénéficiez d'avantages premium pour booster votre carrière musicale.
+            </p>
             
-            <div class="battle-content-detail">
-                <div class="battle-main">
-                    <p class="battle-description">
-                        Le plus grand battle d'Afrobeat de l'année ! Deux artistes phénoménaux s'affrontent pour le titre de Roi et Reine de l'Afrobeat. Afro Queen apporte son flow unique et ses mélodies envoûtantes, tandis que Dance King impressionne avec ses rythmes entraînants et son énergie contagieuse. Qui mérite votre vote ?
-                    </p>
-                    
-                    <h3>Les participants</h3>
-                    
-                    <div class="contestants">
-                        <!-- Contestant 1 -->
-                        <div class="contestant">
-                            <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Afro Queen" class="contestant-image">
-                            <h3 class="contestant-name">Afro Queen</h3>
-                            <span class="contestant-country">Nigeria</span>
-                            <p>Spécialiste de l'Afrobeat avec des influences modernes. 5 ans d'expérience et 3 albums à succès.</p>
-                            
-                            <audio controls style="width: 100%; margin-top: 20px;">
-                                <source src="#" type="audio/mpeg">
-                                Votre navigateur ne supporte pas l'élément audio.
-                            </audio>
-                            
-                            <button class="vote-btn contestant1">
-                                <i class="fas fa-vote-yea"></i> Voter pour Afro Queen
-                            </button>
-                            
-                            <div class="vote-stats">
-                                <div class="vote-progress">
-                                    <div class="vote-progress-bar contestant1"></div>
-                                </div>
-                                <div class="vote-percentage">
-                                    <span>Afro Queen</span>
-                                    <span>65%</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Contestant 2 -->
-                        <div class="contestant">
-                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dance King" class="contestant-image">
-                            <h3 class="contestant-name">Dance King</h3>
-                            <span class="contestant-country">Ghana</span>
-                            <p>Artiste énergique connu pour ses performances scéniques époustouflantes et ses beats entraînants.</p>
-                            
-                            <audio controls style="width: 100%; margin-top: 20px;">
-                                <source src="#" type="audio/mpeg">
-                                Votre navigateur ne supporte pas l'élément audio.
-                            </audio>
-                            
-                            <button class="vote-btn contestant2">
-                                <i class="fas fa-vote-yea"></i> Voter pour Dance King
-                            </button>
-                            
-                            <div class="vote-stats">
-                                <div class="vote-progress">
-                                    <div class="vote-progress-bar contestant2"></div>
-                                </div>
-                                <div class="vote-percentage">
-                                    <span>Dance King</span>
-                                    <span>35%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="vote-count">
-                        2,458 votes
-                    </div>
+            <div class="subscription-plans">
+                <div class="plan-card">
+                    <h3 class="plan-name">Débutant</h3>
+                    <div class="plan-price">Gratuit</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Création de profil artiste</li>
+                        <li><i class="fas fa-check"></i> Participation à 3 battles/mois</li>
+                        <li><i class="fas fa-check"></i> Statistiques de base</li>
+                        <li><i class="fas fa-times"></i> Accès aux statistiques avancées</li>
+                        <li><i class="fas fa-times"></i> Promotion prioritaire</li>
+                        <li><i class="fas fa-times"></i> Support personnalisé</li>
+                    </ul>
+                    <button class="btn btn-outline">Commencer gratuitement</button>
                 </div>
                 
-                <div class="sidebar">
-                    <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px;">
-                        <h3>Comment voter</h3>
-                        <p>1. Écoutez les extraits musicaux des deux artistes</p>
-                        <p>2. Cliquez sur "Voter" sous votre artiste préféré</p>
-                        <p>3. Connectez-vous ou créez un compte gratuit</p>
-                        <p>4. Confirmez votre vote</p>
-                        <p><em>Note: Vous ne pouvez voter qu'une seule fois par battle.</em></p>
-                    </div>
-                    
-                    <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                        <h3>Partager ce battle</h3>
-                        <div style="display: flex; gap: 10px; margin-top: 15px;">
-                            <button style="flex: 1; padding: 10px; background: #3b5998; color: white; border: none; border-radius: 5px;">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
-                            <button style="flex: 1; padding: 10px; background: #1da1f2; color: white; border: none; border-radius: 5px;">
-                                <i class="fab fa-twitter"></i>
-                            </button>
-                            <button style="flex: 1; padding: 10px; background: #c32aa3; color: white; border: none; border-radius: 5px;">
-                                <i class="fab fa-instagram"></i>
-                            </button>
-                            <button style="flex: 1; padding: 10px; background: #25d366; color: white; border: none; border-radius: 5px;">
-                                <i class="fab fa-whatsapp"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rankings Section -->
-    <section class="section rankings-section" id="rankings">
-        <div class="container">
-            <h2 class="section-title rankings-title">Classements <span>des artistes</span></h2>
-            
-            <div class="ranking-tabs">
-                <div class="ranking-tab active">Global</div>
-                <div class="ranking-tab">Cameroun</div>
-                <div class="ranking-tab">Nigeria</div>
-                <div class="ranking-tab">Sénégal</div>
-                <div class="ranking-tab">Afrique du Sud</div>
-            </div>
-            
-            <div class="ranking-list">
-                <div class="ranking-header">
-                    <div>#</div>
-                    <div>Artiste</div>
-                    <div>Victoires</div>
-                    <div>Votes</div>
-                </div>
-                
-                <!-- Ranking Item 1 -->
-                <div class="ranking-item">
-                    <div class="ranking-position">1</div>
-                    <div class="ranking-artist">
-                        <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
-                        Makossa Man
-                    </div>
-                    <div>18</div>
-                    <div>24,587</div>
-                </div>
-                
-                <!-- Ranking Item 2 -->
-                <div class="ranking-item">
-                    <div class="ranking-position">2</div>
-                    <div class="ranking-artist">
-                        <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
-                        Afro Queen
-                    </div>
-                    <div>15</div>
-                    <div>21,432</div>
-                </div>
-                
-                <!-- Ranking Item 3 -->
-                <div class="ranking-item">
-                    <div class="ranking-position">3</div>
-                    <div class="ranking-artist">
-                        <img src="https://images.unsplash.com/photo-1517232115160-ff93364542dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
-                        Rap Master
-                    </div>
-                    <div>16</div>
-                    <div>19,876</div>
-                </div>
-                
-                <!-- Ranking Item 4 -->
-                <div class="ranking-item">
-                    <div class="ranking-position">4</div>
-                    <div class="ranking-artist">
-                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artist" class="ranking-artist-img">
-                        Dance King
-                    </div>
-                    <div>12</div>
-                    <div>18,543</div>
-                </div>
-                
-                <!-- Ranking Item 5 -->
-                <div class="ranking-item">
-                    <div class="ranking-position">5</div>
-                    <div class="ranking-artist">
-                        <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Artist" class="ranking-artist-img">
-                        Soul Diva
-                    </div>
-                    <div>12</div>
-                    <div>17,890</div>
+                <div class="plan-card pro">
+                    <h3 class="plan-name">Artiste Pro</h3>
+                    <div class="plan-price">9.900 FCFA <span>/ mois</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Tous les avantages Débutant</li>
+                        <li><i class="fas fa-check"></i> Participation illimitée aux battles</li>
+                        <li><i class="fas fa-check"></i> Statistiques avancées</li>
+                        <li><i class="fas fa-check"></i> Promotion prioritaire sur la plateforme</li>
+                        <li><i class="fas fa-check"></i> Support personnalisé 24/7</li>
+                        <li><i class="fas fa-check"></i> Badge "Artiste Vérifié"</li>
+                    </ul>
+                    <button class="btn btn-primary">Devenir Artiste Pro</button>
                 </div>
             </div>
         </div>
@@ -1350,22 +1467,22 @@
                 <div class="footer-col">
                     <h3>Navigation</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">Accueil</a></li>
-                        <li><a href="#battles">Battles</a></li>
-                        <li><a href="#artists">Artistes</a></li>
-                        <li><a href="#rankings">Classements</a></li>
-                        <li><a href="#about">À propos</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="battles.html">Battles</a></li>
+                        <li><a href="artists.html">Artistes</a></li>
+                        <li><a href="rankings.html">Classements</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
                     <h3>Pour les artistes</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Créer un profil</a></li>
-                        <li><a href="#">Lancer un battle</a></li>
+                        <li><a href="signup.html?type=artist">Créer un profil</a></li>
+                        <li><a href="create-battle.html">Lancer un battle</a></li>
+                        <li><a href="pro-subscription.html">Devenir Artiste Pro</a></li>
                         <li><a href="#">Statistiques</a></li>
-                        <li><a href="#">Devenir artiste vérifié</a></li>
                         <li><a href="#">Programme de récompenses</a></li>
                     </ul>
                 </div>
@@ -1391,6 +1508,102 @@
             </div>
         </div>
     </footer>
+
+    <!-- Authentication Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Connexion à ZONE VS MUZIK</h3>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="login">Connexion</div>
+                <div class="modal-tab" data-tab="signup">Inscription</div>
+            </div>
+            <div class="modal-content">
+                <!-- Login Form -->
+                <div id="login-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Mot de passe</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <div class="form-group" style="text-align: right;">
+                            <a href="#" style="color: var(--green);">Mot de passe oublié?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Se connecter</button>
+                    </form>
+                    <div style="margin-top: 20px; text-align: center;">
+                        <p>Ou connectez-vous avec:</p>
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <button style="flex: 1; padding: 10px; background: #3b5998; color: white; border: none; border-radius: 5px;">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                            <button style="flex: 1; padding: 10px; background: #1da1f2; color: white; border: none; border-radius: 5px;">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Signup Form -->
+                <div id="signup-form" style="display: none;">
+                    <h4>Type de compte</h4>
+                    <div class="account-type">
+                        <div class="type-option active" data-type="artist">
+                            <i class="fas fa-microphone-alt"></i>
+                            <p>Artiste</p>
+                        </div>
+                        <div class="type-option" data-type="fan">
+                            <i class="fas fa-user"></i>
+                            <p>Fan</p>
+                        </div>
+                    </div>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label for="signup-name">Nom complet</label>
+                            <input type="text" id="signup-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email">Email</label>
+                            <input type="email" id="signup-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">Mot de passe</label>
+                            <input type="password" id="signup-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-country">Pays</label>
+                            <select id="signup-country" required>
+                                <option value="">Sélectionnez votre pays</option>
+                                <option value="cm">Cameroun</option>
+                                <option value="ng">Nigeria</option>
+                                <option value="sn">Sénégal</option>
+                                <option value="ci">Côte d'Ivoire</option>
+                                <option value="za">Afrique du Sud</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="artist-name-group">
+                            <label for="artist-name">Nom d'artiste</label>
+                            <input type="text" id="artist-name">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" required> J'accepte les <a href="#" style="color: var(--green);">conditions d'utilisation</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Créer un compte</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Hero Slider
@@ -1433,7 +1646,7 @@
                 }, 200);
                 
                 // In a real app, this would trigger the voting system
-                alert('Pour voter, vous devez être connecté. Redirection vers la page de connexion...');
+                alert('Votre vote a été enregistré avec succès!');
             });
         });
         
@@ -1475,6 +1688,107 @@
                 tab.classList.add('active');
             });
         });
+        
+        // Subscription button toggle
+        const subscribeButtons = document.querySelectorAll('.subscribe-btn');
+        subscribeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const isSubscribed = this.classList.contains('subscribed');
+                
+                if (isSubscribed) {
+                    this.classList.remove('subscribed');
+                    this.innerHTML = '<i class="fas fa-heart"></i>';
+                    alert('Abonnement annulé');
+                } else {
+                    this.classList.add('subscribed');
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    alert('Abonnement réussi! Vous recevrez les notifications de cet artiste.');
+                }
+            });
+        });
+        
+        // Authentication Modal
+        const authModal = document.getElementById('auth-modal');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const closeModal = document.getElementById('close-modal');
+        const modalTabs = document.querySelectorAll('.modal-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const typeOptions = document.querySelectorAll('.type-option');
+        
+        // Show login modal
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            authModal.classList.add('active');
+            showLoginForm();
+        });
+        
+        // Show signup modal
+        signupBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            authModal.classList.add('active');
+            showSignupForm();
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            authModal.classList.remove('active');
+        });
+        
+        // Modal tab switching
+        modalTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                modalTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                if (tab.dataset.tab === 'login') {
+                    showLoginForm();
+                } else {
+                    showSignupForm();
+                }
+            });
+        });
+        
+        function showLoginForm() {
+            loginForm.style.display = 'block';
+            signupForm.style.display = 'none';
+        }
+        
+        function showSignupForm() {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        }
+        
+        // Account type selection
+        typeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                typeOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                // Show artist name field if artist is selected
+                if (option.dataset.type === 'artist') {
+                    document.getElementById('artist-name-group').style.display = 'block';
+                } else {
+                    document.getElementById('artist-name-group').style.display = 'none';
+                }
+            });
+        });
+        
+        // Close modal when clicking outside
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.classList.remove('active');
+            }
+        });
+        
+        // Simulate user login state
+        setTimeout(() => {
+            // For demo purposes, simulate a logged-in state
+            // In a real app, this would come from authentication system
+            document.getElementById('guest-actions').style.display = 'none';
+            document.getElementById('user-actions').style.display = 'flex';
+        }, 2000);
     </script>
 </body>
 </html>
